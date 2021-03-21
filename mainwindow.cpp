@@ -203,7 +203,8 @@ void MainWindow::ButtonAddOnClick()
     QPen tmpPen;
     tmpPen.setWidth(2);
     tmpPen.setColor(Qt::black);
-    area->DrawTree(tmpPen);
+    area->needToFind = false;
+    //area->DrawTree(tmpPen);
     //Обновляем виджет что бы дерево перерисовалось.
     area->update();
 }
@@ -221,20 +222,29 @@ void MainWindow::ButtonDelOnClick()
     QPen tmpPen;
     tmpPen.setWidth(2);
     tmpPen.setColor(Qt::black);
-
-    area->DrawTree(tmpPen);
+    area->needToFind = false;
+    //area->DrawTree(tmpPen);
     //Обновляем виджет что бы дерево перерисовалось.
     area->update();
 }
 
 void MainWindow::ButtonFindOnClick()
 {
+    if(!(this->valueEdit->text().isEmpty()))
+    {
+        area->toFind = valueEdit->text().toInt();
+        area->needToFind = true;
     QPen tmpPen;
-    tmpPen.setWidth(2);
-    tmpPen.setColor(Qt::black);
-    area->DrawTree(tmpPen);
+    tmpPen.setWidth(2);    
+    //tmpPen.setColor(Qt::red);
+    //
     //Обновляем виджет что бы дерево перерисовалось.
+    //area->DrawTree(tmpPen);
+    //area->drawFindNode(tmpPen);
+    tmpPen.setColor(Qt::red);
     area->update();
+    //area->needToFind = false;
+    }
 }
 
 void MainWindow::ButtonCreateOnClick()
@@ -256,8 +266,9 @@ void MainWindow::ButtonCreateOnClick()
         area->balancedTree->AddNode(gen);
     }
 
-    area->DrawTree(tmpPen);
+    //area->DrawTree(tmpPen);
     //Обновляем виджет что бы дерево перерисовалось.
+    area->needToFind = false;
     area->update();
 
 
@@ -271,8 +282,8 @@ void MainWindow::ButtonClearOnClick()
     area->chaoticTree->Clear();
     area->searchTree->Clear();
     area->balancedTree->Clear();
-    area->DrawTree(tmpPen);
-
+    //area->DrawTree(tmpPen);
+    area->needToFind = false;
     //Обновляем виджет что бы дерево перерисовалось.
     area->update();
 }

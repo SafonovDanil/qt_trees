@@ -1,5 +1,6 @@
 #include "mainwindow.h"
-
+#include "basic_tree.h"
+#include "search_tree.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

@@ -14,7 +14,7 @@ Area::Area(QWidget *parent): QWidget(parent)
     //Это для примера. Иницализируем цвет карандаша по умолчанию
 
     myPen.setWidth(2);
-    //myPen.setColor(Qt::red);
+    myPen.setColor(Qt::black);
 
 
 
@@ -54,7 +54,10 @@ void Area::paintEvent(QPaintEvent *)
     painter.setFont(font);
     //painter.setFont(QFont("Arial", 20));
    // painter.drawText(rect(), Qt::AlignCenter, "Qt");
-    drawTreeRecursively(&painter, (*ptrTree)->getRoot(), 0, painter.device()->width(), 55);
+    myPen.setColor(Qt::black);
+    DrawTree(myPen);
+    if(needToFind)
+        drawFindNode(myPen);
 }
 
 
@@ -69,6 +72,7 @@ void Area::DrawTree(QPen &tmpPen)
 {
     QPainter painter(this);
     myPen = tmpPen;
+    myPen.setColor(Qt::black);
     painter.setPen(myPen);
     QFont font = painter.font();
     font.setPixelSize(20);
@@ -83,6 +87,49 @@ void Area::DrawTree(QPen &tmpPen)
 
 
 }
+
+void Area::drawFindNode(QPen &tmpPen)
+{
+    QPainter painter(this);
+    myPen = tmpPen;
+    myPen.setColor(Qt::red);
+    painter.setPen(myPen);
+    QFont font = painter.font();
+    font.setPixelSize(20);
+    font.setBold(true);
+    //font.setFamily("Helvetica");
+    font.setFamily("Consolas");
+    painter.setFont(font);
+    //painter.setFont(QFont("Arial", 20));
+    //painter.drawText(rect(), Qt::AlignCenter, "Qt");
+    drawFindNodeRecurs(&painter, (*ptrTree)->getRoot(), 0, painter.device()->width(), 55);
+
+}
+
+
+void Area:: drawFindNodeRecurs(QPainter *canva, basic_tree<int>::node *root, int l, int r, int h)
+{
+    if (root) {
+        int centr_x = (l + r) / 2;
+        int rr = 25;
+        int x0 = centr_x - rr;
+        if(root->data == toFind)
+        {
+        canva->drawEllipse(x0, h, rr * 2, rr * 2);
+        QString str = QString::number(root->data, 10);
+        canva->drawText(x0 + rr / 2, h + rr, str);
+        }
+        if (root->lt) {
+            drawFindNodeRecurs(canva, root->lt, l, centr_x, h + 60);
+        }
+
+        if (root ->rt) {
+            drawFindNodeRecurs(canva, root->rt, centr_x, r, h + 60);
+        }
+
+    }
+}
+
 
 void Area:: drawTreeRecursively(QPainter *canva, basic_tree<int>::node *root, int l, int r, int h)
 {

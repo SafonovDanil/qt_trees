@@ -20,6 +20,8 @@ class Area : public QWidget
     chaotic_tree<int> *chaoticTree;            //методы класса будут вызываться у каждого объекта
     search_tree<int> *searchTree;              //отрисовываться будет дерево, на которое указывает ptrTree
     balanced_search_tree<int> *balancedTree;
+    bool needToFind;       //флаг показывающий, нужно ли искать вершину. Создаю внутри класса, тк не могу передавать аргументы в PaintEvent.
+    int toFind;            //значение, которое нужно найти.
 public:
     QPen myPen;
 
@@ -27,9 +29,11 @@ public:
     ~Area();
     void setTree(basic_tree<int> *);
     void DrawTree(QPen &tmpPen);
+    void drawFindNode(QPen &tmpPen);
 
 protected:
     void drawTreeRecursively(QPainter *, basic_tree<int>::node *, int, int, int);
+    void drawFindNodeRecurs(QPainter *, basic_tree<int>::node *, int, int, int);
     // обработчики событий
     void paintEvent(QPaintEvent *event);
 

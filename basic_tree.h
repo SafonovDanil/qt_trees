@@ -3,31 +3,31 @@
 
 class Area;
 
-template <class type> class basic_tree //абстрактный класс базовое дерево
+template <class type> class basic_tree
 {
     friend Area;
 
 
 protected:
 
-    class node //класс базовый узел
+    class node
     {
     public:
         type data;
         node *lt, *rt;
-        node(type&, int); //второй аргумент - хард код, из-за того, что класс шаблон, компилятор выдавал ошибку о неоднозначности вызова, тк вместо type мог быть node
+        node(type&, int);
         node(node&);
         node(type& inf, node*plt = nullptr, node*prt = nullptr);
         node& operator = (node& obj);
     };
 
     static int height(node*);
-    node* getRoot(); //возвращает указатель на корень
-    void ClearTree(basic_tree::node*&root); //рекурсивное удаление
+    node* getRoot();
+    void ClearTree(basic_tree::node*&root);
     node *Parents(type, node *);         // возвращает РОДИТЕЛЯ
 
     node* root;
-    node* iterator; //от идеи использовать итератор отказался, делал через рекурсивные функции в protected зоне, использующие указатели
+    node* iterator;
 
 public:
     basic_tree();
