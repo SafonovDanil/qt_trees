@@ -15,7 +15,8 @@ protected:
     public:
         type data;
         node *lt, *rt;
-        node(type&, int);
+        //node(type&) - ошибка неоднозначности вызова (скорее всего случай <type> == node)
+        node(type&, int); //второй аргумент - хардкод
         node(node&);
         node(type& inf, node*plt = nullptr, node*prt = nullptr);
         node& operator = (node& obj);
@@ -157,16 +158,15 @@ template<class type> bool basic_tree<type>::getData(type& inf)
     return false;
 }
 
-template<class type> void basic_tree<type>::ClearTree(basic_tree::node *& lroot)
+template<class type> void basic_tree<type>::ClearTree(basic_tree::node *& ptr)
 {
-    if (lroot)
+    if (ptr)
     {
-        if(iterator == lroot->rt || iterator == lroot->lt || iterator == lroot)
-            iterator = root;
-        ClearTree(lroot->lt);
-        ClearTree(lroot->rt);
-        delete lroot;
-        lroot = nullptr;
+
+        ClearTree(ptr->lt);
+        ClearTree(ptr->rt);
+        delete ptr;
+        ptr = nullptr;
     }
 }
 
