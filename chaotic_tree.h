@@ -10,8 +10,8 @@
 template<class type> class chaotic_tree: public basic_tree<type>
 {
 protected:
-    void addTo(typename basic_tree<type>::node *, typename basic_tree<type>::node *);
-    bool find(typename basic_tree<type>::node *, type inf);
+    void addTo(typename basic_tree<type>::node *, typename basic_tree<type>::node *); //добавить вершину в поддерево
+    bool find(typename basic_tree<type>::node *, type inf); //рекурсивная функция поиска
 public:
     chaotic_tree();
     chaotic_tree(chaotic_tree<type>&);
@@ -20,7 +20,7 @@ public:
     chaotic_tree<type>& operator = (chaotic_tree<type>&);
     virtual bool AddNode(type&);
     virtual bool DelNode(type&);
-    bool FindNode(type&);
+    bool FindNode(type&); //функция поиска
 };
 
 template<class type> chaotic_tree<type>::chaotic_tree(): chaotic_tree<type>::basic_tree()
