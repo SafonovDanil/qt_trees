@@ -11,6 +11,7 @@ template<class type> class chaotic_tree: public basic_tree<type>
 {
 protected:
     void addTo(typename basic_tree<type>::node *, typename basic_tree<type>::node *);
+    bool find(typename basic_tree<type>::node *, type inf);
 public:
     chaotic_tree();
     chaotic_tree(chaotic_tree<type>&);
@@ -36,7 +37,7 @@ template<class type> chaotic_tree<type>::chaotic_tree(type*arr, int n)
     if(arr)
     {
         for(int i = 0; i < n; i++)
-            addTo(arr[i]);
+            AddNode(arr[i]);
     }
 }
 
@@ -57,6 +58,14 @@ template<class type> void chaotic_tree<type>::addTo(typename basic_tree<type>::n
             R->lt = N;
         }
     }
+}
+
+template<class type> bool chaotic_tree<type>::find(typename basic_tree<type>::node *R, type inf)
+{
+    if(R->data == inf)
+        return true;
+    else
+        return (find(R->lt, inf)||find(R->rt, inf));
 }
 
 template<class type>chaotic_tree<type>& chaotic_tree<type>::operator = (chaotic_tree<type>& obj)
@@ -153,19 +162,7 @@ template<class type> bool chaotic_tree<type>::DelNode(type &inf)
 
 template<class type> bool chaotic_tree<type>::FindNode(type& inf)
 {
-    typename chaotic_tree<type>::node* ptr = basic_tree<type>::root;
-
-        while (ptr && ptr->data != inf)
-        {
-            if (ptr->data > inf)
-                ptr = ptr->lt;
-            else
-                ptr = ptr->rt;
-        }
-
-        if (!ptr)
-            return false;
-        return true;
+    return find(basic_tree<type>::root, inf);
 }
 
 
