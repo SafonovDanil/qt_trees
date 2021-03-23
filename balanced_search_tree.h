@@ -2,7 +2,6 @@
 #define BALANCED_SEARCH_TREE_H
 
 #include "search_tree.h"
-#include <algorithm>
 #include <stack>
 
 
@@ -42,7 +41,7 @@ public:
 };
 
 
-template<class type> balanced_search_tree<type>::balanced_node::balanced_node(type& inf):search_tree<type>::node(inf, 0)
+template<class type> balanced_search_tree<type>::balanced_node::balanced_node(type& inf):search_tree<type>::node(inf)
 {
     balance = 0;
 }

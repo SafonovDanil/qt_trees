@@ -15,10 +15,15 @@ protected:
     public:
         type data;
         node *lt, *rt;
+        /*
         //node(type&) - ошибка неоднозначности вызова (скорее всего случай <type> == node)
         node(type&, int); //второй аргумент - хардкод
+        */
+
+        //ошибку вызывал ниже закомментированный конструктор, он был объявлен, но не было описания, первые аргументы совпадали, вызывалась неоднозначность
+        node(type&);
         node(node&);
-        node(type& inf, node*plt = nullptr, node*prt = nullptr);
+        //node(type& inf, node*plt = nullptr, node*prt = nullptr);
         node& operator = (node& obj);
     };
 
@@ -48,7 +53,7 @@ public:
 };
 
 
-template<class type> basic_tree<type>::node::node(type& inf, int)
+template<class type> basic_tree<type>::node::node(type& inf)
 {
     data = inf;
     rt = lt = nullptr;

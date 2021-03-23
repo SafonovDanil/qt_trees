@@ -87,7 +87,7 @@ template<class type> bool chaotic_tree<type>::AddNode(type &inf)
     else
         ptr = &((*ptr)->rt);
     }
-    (*ptr)  = new typename chaotic_tree<type>::node(inf, 0);
+    (*ptr)  = new typename chaotic_tree<type>::node(inf);
     if(*ptr)
         return true;
     return false;

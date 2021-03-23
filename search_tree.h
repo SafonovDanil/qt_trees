@@ -2,7 +2,7 @@
 #define SEARCH_TREE_H
 
 #include "basic_tree.h"
-#include <algorithm>
+
 
 
 
@@ -78,7 +78,7 @@ template<class type> bool search_tree<type>::AddNode(type& inf)
         else
             ptr = &((*ptr)->rt);
     }
-    *ptr = new typename search_tree<type>::node(inf, 0);
+    *ptr = new typename search_tree<type>::node(inf);
     if(*ptr)
         return true;
     return false;
