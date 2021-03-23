@@ -97,7 +97,7 @@ template<class type> typename basic_tree<type>::node& basic_tree<type>::node::op
             *rt = *(obj.rt);
         }
         else
-            rt = node(*(obj.rt));
+            rt = new node(*(obj.rt));
     }
     else
         if(rt)
